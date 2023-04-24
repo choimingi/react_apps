@@ -1,0 +1,12 @@
+version: "3"                       # 도커 컴포즈 버전
+services:                          # 이곳에 실행하려는 컨테이너 정의
+  react:                           # 컨테이너 이름
+    build:                         # 현 디렉토리에 있는 Dockerfile 사용
+      context: .                   # 도커 이미지를 구성하기 위한 파일과 폴더들이 있는 위치
+      dockerfile: Dockerfile.dev   # 도커 파일 어떤 것인지 지정
+    ports:                         # 포트 매핑  로컬포트:컨테이너포트
+     - "3000:3000"
+    volumes:                       # 로컬 머신에 있는 파일들 매핑
+    - /usr/src/app/node_modules
+    - ./:/usr/src/app
+    stdin_open: true

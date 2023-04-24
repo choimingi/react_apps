@@ -1,0 +1,18 @@
+# 베이스 이미지
+From node:16-alpine
+
+# 컨테이너 안 어느 위치에 리액트 앱을 넣을 것인지
+WORKDIR /usr/src/app
+
+# package.json을 컨테이너에 먼저 넣은 후 현재 폴더도 복사
+COPY package*.json ./
+
+# npm install은 package.json에 적혀있는 종속성들을 웹에서 자동으로 
+# 다운 받아서 설치해주는 명령어
+RUN npm install
+
+# 다른 react 파일들도 복사
+COPY ./ ./
+
+# 컨테이너가 시작되었을 때 실행할 실행 파일 or 셸 스크립트
+CMD [ "npm", "run", "start" ]
